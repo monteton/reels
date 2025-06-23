@@ -86,7 +86,7 @@
       color: #fff;
       margin-top: 7vw;
       font-size: 8vw;
-      font-weight: 700;
+      font-weight: 7 00;
       letter-spacing: 2px;
       text-transform: uppercase;
       position: relative;
@@ -115,27 +115,26 @@
     .buttons-grid {
       width: 90vw;
       max-width: 420px;
-      margin: 6vw auto 12vh auto; /* Нижний отступ увеличен, чтобы не мешать меню */
+      margin: 6vw auto 12vh auto;
       position: relative;
       z-index: 5;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 3vw;
     }
+    /* Кнопка с фото и подписью снизу */
     .course-button {
-      background: #222;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-      width: 100%;
-      min-height: 35vw;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
+      justify-content: flex-start;
       align-items: center;
       position: relative;
-      background-size: cover;
-      background-position: center;
+      background: #222;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      overflow: hidden;
+      width: 100%;
+      min-height: 35vw;
       opacity: 0;
       transform: translateY(40px);
       transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -144,26 +143,29 @@
       opacity: 1;
       transform: translateY(0);
     }
-    course-button::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.4);
-      z-index: 1;
+    /* Фото внутри кнопки */
+    .course-button img {
+      width: 100%;
+      height: 30vw;
+      object-fit: cover;
+      background: #222;
     }
+    /* Подпись под фото */
     .course-button span {
       position: relative;
       z-index: 2;
       color: white;
       font-size: 6vw;
-      font-weight: 7 00;
-      margin-bottom: 6vw;
+      font-weight: 700;
+      margin-top: 8px;
+      margin-bottom: 8px;
       text-align: center;
       text-shadow: 0 0 8px rgba(0,0,0,0.7);
-      padding: 0 4vw;
+      background: none;
+    }
+    /* Убираем затемнение под текстом */
+    .course-button::after {
+      content: none;
     }
     /* Нижнее меню — мелкое, с иконками, чуть выше низа */
     .menu-bar {
@@ -185,7 +187,7 @@
       color: white;
       border: none;
       padding: 0 8vw;
-      font-size: 0; /* Текст скрыт */
+      font-size: 0;
       font-weight: 700;
       font-family: 'Lato', sans-serif;
       cursor: pointer;
@@ -216,23 +218,29 @@
   </div>
   <div class="category-title">Темы курса</div>
   <div class="buttons-grid">
-    <!-- Кнопки с картинками и названиями тем — 2 в ряд, 3 по вертикали -->
-    <div class="course-button" style="background-image: url('pic1.jpg')">
+    <!-- Кнопки с картинками и подписями под фото — 2 в ряд, 3 по вертикали -->
+    <div class="course-button">
+      <img src="pic1.jpg" alt="Сценарии">
       <span>Сценарии</span>
     </div>
-    <div class="course-button" style="background-image: url('pic2.jpg')">
+    <div class="course-button">
+      <img src="pic2.jpg" alt="CapCut">
       <span>CapCut</span>
     </div>
-    <div class="course-button" style="background-image: url('pic3.jpg')">
+    <div class="course-button">
+      <img src="pic3.jpg" alt="Тренды">
       <span>Тренды</span>
     </div>
-    <div class="course-button" style="background-image: url('pic4.jpg')">
+    <div class="course-button">
+      <img src="pic4.jpg" alt="Монтаж">
       <span>Монтаж</span>
     </div>
-    <div class="course-button" style="background-image: url('pic5.jpg')">
+    <div class="course-button">
+      <img src="pic5.jpg" alt="Аудитория">
       <span>Аудитория</span>
     </div>
-    <div class="course-button" style="background-image: url('pic6.png')">
+    <div class="course-button">
+      <img src="pic6.png" alt="Промо">
       <span>Промо</span>
     </div>
   </div>
