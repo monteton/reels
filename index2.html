@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reels of Reels</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+      font-family: 'Lato', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    /* Звёзды */
+    .stars-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    #stars, #stars2, #stars3 {
+      position: absolute;
+      background: transparent;
+    }
+    #stars {
+      width: 1px;
+      height: 1px;
+      box-shadow: var(--shadows-small);
+      animation: animStar 50s linear infinite;
+    }
+    #stars:after {
+      content: " ";
+      position: absolute;
+      top: 2000px;
+      width: 1px;
+      height: 1px;
+      background: transparent;
+      box-shadow: var(--shadows-small);
+    }
+    #stars2 {
+      width: 2px;
+      height: 2px;
+      box-shadow: var(--shadows-medium);
+      animation: animStar 100s linear infinite;
+    }
+    #stars2:after {
+      content: " ";
+      position: absolute;
+      top: 2000px;
+      width: 2px;
+      height: 2px;
+      background: transparent;
+      box-shadow: var(--shadows-medium);
+    }
+    #stars3 {
+      width: 3px;
+      height: 3px;
+      box-shadow: var(--shadows-big);
+      animation: animStar 150s linear infinite;
+    }
+    #stars3:after {
+      content: " ";
+      position: absolute;
+      top: 2000px;
+      width: 3px;
+      height: 3px;
+      background: transparent;
+      box-shadow: var(--shadows-big);
+    }
+    /* Анимация звёзд */
+    @keyframes animStar {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-2000px); }
+    }
+    /* Заголовок */
+    #title {
+      text-align: center;
+      color: #fff;
+      margin-top: 7vw;
+      font-size: 8vw;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 10;
+    }
+    #title span {
+      display: block;
+      font-size: 4.5vw;
+      margin-top: 2vw;
+      font-weight: 300;
+      background: -webkit-linear-gradient(#4facfe, #00f2fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* Контейнер для видео - опущен ниже */
+    .banner-collage {
+      width: 90vw;
+      max-width: 400px;
+      height: 40vh;
+      max-height: 340px;
+      margin: 8vw auto 0 auto; /* Увеличили верхний отступ */
+      position: relative;
+      z-index: 5;
+    }
+    .video-thumb {
+      background: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      width: 40vw;
+      max-width: 160px;
+      height: 71vw;
+      max-height: 285px;
+      position: absolute;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    /* Расположение 2 видео рядом без перекрытия и третьего с перекосом сверху */
+    .video-thumb:nth-child(1) { left: 10%; bottom: 0; z-index: 7; }
+    .video-thumb:nth-child(2) { right: 10%; bottom: 0; z-index: 7; }
+    .video-thumb:nth-child(3) { left: 50%; top: 0; z-index: 8; transform: translateX(-50%) rotate(-8deg) translateY(40px); }
+    .video-thumb video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* Анимация появления видео */
+    .video-thumb.slided-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .video-thumb.slided-in:nth-child(3) {
+      transform: translateX(-50%) rotate(-8deg) translateY(0);
+    }
+    /* Кнопка */
+    .start-button {
+      position: fixed;
+      bottom: 6vh;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 2.5vh 10vw;
+      font-size: 4.5vw;
+      font-weight: 700;
+      font-family: 'Lato', sans-serif;
+      box-shadow: 0 0 15px #4facfe, 0 0 25px #00f2fe, 0 10px 25px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      z-index: 20;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.3s;
+    }
+    .start-button:hover {
+      transform: translateX(-50%) scale(1.05);
+    }
+    /* Иконки соцсетей и редакторов */
+    .icons-bar {
+      position: fixed;
+      bottom: 22vh;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 7vw;
+      z-index: 15;
+    }
+    .icon {
+      width: 10vw;
+      height: 10vw;
+      max-width: 50px;
+      max-height: 50px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 10px #4facfe, 0 0 15px #00f2fe;
+      transition: all 0.3s;
+    }
+    .icon:hover {
+      box-shadow: 0 0 15px #4facfe, 0 0 25px #00f2fe;
+      transform: scale(1.1);
+    }
+    .icon i {
+      font-size: 5vw;
+      color: white;
+      text-shadow: 0 0 5px #4facfe, 0 0 10px #00f2fe;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars-container">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+  </div>
+  <div id="title">
+    Reels of Reels
+    <span>Делаем вирусные видео</span>
+  </div>
+  <div class="banner-collage">
+    <div class="video-thumb">
+      <video autoplay muted loop playsinline>
+        <source src="1.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-thumb">
+      <video autoplay muted loop playsinline>
+        <source src="2.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="video-thumb">
+      <video autoplay muted loop playsinline>
+        <source src="3.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  <div class="icons-bar">
+    <div class="icon"><i class="fab fa-instagram"></i></div>
+    <div class="icon"><i class="fab fa-youtube"></i></div>
+    <div class="icon"><i class="fab fa-tiktok"></i></div>
+    <div class="icon"><i class="fas fa-cut"></i></div>
+    <div class="icon"><i class="fas fa-film"></i></div>
+  </div>
+  <button class="start-button" id="startBtn">Старт</button>
+
+  <script>
+    // Генерация звёзд
+    function multipleBoxShadow(n) {
+      let value = '';
+      for (let i = 0; i < n; i++) {
+        value += `${Math.floor(Math.random() * 2000)}px ${Math.floor(Math.random() * 2000)}px #FFF`;
+        if (i < n - 1) value += ', ';
+      }
+      return value;
+    }
+    document.documentElement.style.setProperty('--shadows-small', multipleBoxShadow(700));
+    document.documentElement.style.setProperty('--shadows-medium', multipleBoxShadow(200));
+    document.documentElement.style.setProperty('--shadows-big', multipleBoxShadow(100));
+
+    // Анимация появления видео
+    document.addEventListener('DOMContentLoaded', () => {
+      const videoThumbs = document.querySelectorAll('.video-thumb');
+      // Появление первых двух видео сразу
+      videoThumbs.forEach((thumb, index) => {
+        if (index < 2) {
+          thumb.classList.add('slided-in');
+        }
+      });
+      // Появление третьего видео через 2 секунды
+      setTimeout(() => {
+        if (videoThumbs.length > 2) {
+          videoThumbs[2].classList.add('slided-in');
+        }
+      }, 2000);
+    });
+
+    // Переход по кнопке "Старт"
+    document.getElementById('startBtn').addEventListener('click', function() {
+      window.location.href = 'main1.html';
+    });
+  </script>
+</body>
+</html>

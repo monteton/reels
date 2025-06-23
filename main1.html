@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Курс по Reels</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+      font-family: 'Lato', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    /* Звёзды */
+    .stars-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    #stars, #stars2, #stars3 {
+      position: absolute;
+      background: transparent;
+    }
+    #stars {
+      width: 1px;
+      height: 1px;
+      box-shadow: var(--shadows-small);
+      animation: animStar 50s linear infinite;
+    }
+    #stars:after {
+      content: " ";
+      position: absolute;
+      top: 2000px;
+      width: 1px;
+      height: 1px;
+      background: transparent;
+      box-shadow: var(--shadows-small);
+    }
+    #stars2 {
+      width: 2px;
+      height: 2px;
+      box-shadow: var(--shadows-medium);
+      animation: animStar 100s linear infinite;
+    }
+    #stars2:after {
+      content: " ";
+      position: absolute;
+      top: 2000px;
+      width: 2px;
+      height: 2px;
+      background: transparent;
+      box-shadow: var(--shadows-medium);
+    }
+    #stars3 {
+      width: 3px;
+      height: 3px;
+      box-shadow: var(--shadows-big);
+      animation: animStar 150s linear infinite;
+    }
+    #stars3:after {
+      content: " ";
+      position: absolute;
+      top: 2000px;
+      width: 3px;
+      height: 3px;
+      background: transparent;
+      box-shadow: var(--shadows-big);
+    }
+    /* Анимация звёзд */
+    @keyframes animStar {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-2000px); }
+    }
+    /* Заголовок */
+    #title {
+      text-align: center;
+      color: #fff;
+      margin-top: 7vw;
+      font-size: 8vw;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 10;
+    }
+    #title span {
+      display: block;
+      font-size: 4.5vw;
+      margin-top: 2vw;
+      font-weight: 300;
+      background: -webkit-linear-gradient(#4facfe, #00f2fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* Категория (заголовок) */
+    .category-title {
+      text-align: center;
+      color: white;
+      font-size: 6vw;
+      font-weight: 700;
+      margin: 4vw 0 2vw 0;
+      z-index: 10;
+      position: relative;
+    }
+    /* Контейнер для кнопок — 2 в ряд, 3 по вертикали */
+    .buttons-grid {
+      width: 90vw;
+      max-width: 420px;
+      margin: 6vw auto 12vh auto; /* Нижний отступ увеличен, чтобы не мешать меню */
+      position: relative;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3vw;
+    }
+    .course-button {
+      background: #222;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      width: 100%;
+      min-height: 35vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .course-button.slided-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    course-button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+    .course-button span {
+      position: relative;
+      z-index: 2;
+      color: white;
+      font-size: 6vw;
+      font-weight: 7 00;
+      margin-bottom: 6vw;
+      text-align: center;
+      text-shadow: 0 0 8px rgba(0,0,0,0.7);
+      padding: 0 4vw;
+    }
+    /* Нижнее меню — мелкое, с иконками, чуть выше низа */
+    .menu-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 6vh;
+      background: rgba(30, 50, 70, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10vw;
+      z-index: 20;
+      box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
+    }
+    .menu-button {
+      background: transparent;
+      color: white;
+      border: none;
+      padding: 0 8vw;
+      font-size: 0; /* Текст скрыт */
+      font-weight: 700;
+      font-family: 'Lato', sans-serif;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .menu-button i {
+      font-size: 4vw;
+      color: white;
+    }
+    .menu-button:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="stars-container">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+  </div>
+  <div id="title">
+    Курс по Reels
+    <span>Выберите категорию</span>
+  </div>
+  <div class="category-title">Темы курса</div>
+  <div class="buttons-grid">
+    <!-- Кнопки с картинками и названиями тем — 2 в ряд, 3 по вертикали -->
+    <div class="course-button" style="background-image: url('pic1.png')">
+      <span>Сценарии</span>
+    </div>
+    <div class="course-button" style="background-image: url('pic2.png')">
+      <span>CapCut</span>
+    </div>
+    <div class="course-button" style="background-image: url('pic3.png')">
+      <span>Тренды</span>
+    </div>
+    <div class="course-button" style="background-image: url('pic4.png')">
+      <span>Монтаж</span>
+    </div>
+    <div class="course-button" style="background-image: url('pic5.png')">
+      <span>Аудитория</span>
+    </div>
+    <div class="course-button" style="background-image: url('pic6.png')">
+      <span>Промо</span>
+    </div>
+  </div>
+  <div class="menu-bar">
+    <button class="menu-button" onclick="window.location.href='index.html'">
+      <i class="fas fa-home"></i>
+    </button>
+    <button class="menu-button" onclick="window.history.back()">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+  </div>
+
+  <script>
+    // Генерация звёзд
+    function multipleBoxShadow(n) {
+      let value = '';
+      for (let i = 0; i < n; i++) {
+        value += `${Math.floor(Math.random() * 2000)}px ${Math.floor(Math.random() * 2000)}px #FFF`;
+        if (i < n - 1) value += ', ';
+      }
+      return value;
+    }
+    document.documentElement.style.setProperty('--shadows-small', multipleBoxShadow(700));
+    document.documentElement.style.setProperty('--shadows-medium', multipleBoxShadow(200));
+    document.documentElement.style.setProperty('--shadows-big', multipleBoxShadow(100));
+
+    // Анимация появления кнопок
+    document.addEventListener('DOMContentLoaded', () => {
+      const buttons = document.querySelectorAll('.course-button');
+      setTimeout(() => {
+        buttons.forEach((button, index) => {
+          setTimeout(() => {
+            button.classList.add('slided-in');
+          }, 150 * index);
+        });
+      }, 500);
+    });
+  </script>
+</body>
+</html>
